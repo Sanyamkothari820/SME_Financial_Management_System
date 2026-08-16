@@ -44,22 +44,6 @@ def calculate_current_ratio(current_assets, current_liabilities):
     return current_assets / current_liabilities
 
 
-def calculate_debt_to_equity(total_debt, owner_equity):
-
-    if owner_equity == 0:
-        return 0
-
-    return total_debt / owner_equity
-
-
-def calculate_debt_to_cashflow(total_debt, cashflow):
-
-    if cashflow <= 0:
-        return None
-
-    return total_debt / cashflow
-
-
 def calculate_receivables_ratio(receivables, revenue):
 
     if revenue == 0:
