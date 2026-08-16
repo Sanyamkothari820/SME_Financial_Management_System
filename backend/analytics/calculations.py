@@ -103,3 +103,15 @@ def calculate_revenue_change(current, previous):
 
 def calculate_expense_change(current, previous):
     return current - previous
+
+def calculate_current_assets(financial_position):
+
+    return (financial_position.cash + financial_position.bank_balance + financial_position.receivables + financial_position.inventory + financial_position.other_current_assets)
+
+def calculate_current_liabilities(financial_position):
+
+    return (financial_position.accounts_payable + financial_position.short_term_debt + financial_position.other_current_liabilities)
+
+def calculate_receivables(financial_position):
+
+    return financial_position.receivables
