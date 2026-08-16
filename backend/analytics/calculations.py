@@ -28,12 +28,11 @@ def calc_cashflow(cash_inflow, cash_outflow):
 
 
 
-def calc_profit_margin(revenue, expenses):
-    if revenue<expenses:
-        return 0
+def calc_profit(revenue, expenses):
+    
     profit = revenue -expenses
 
-    return (profit/revenue) * 100
+    return profit
 
 
 def calc_revenue_by_category(transactions):
