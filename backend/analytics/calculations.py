@@ -1,0 +1,106 @@
+import pandas as pd
+data = [1,2,3,4,5]
+def calc_revenue(transactions):
+
+    revenue = 0
+    for transaction in transactions:
+
+        if transaction.transaction_type == "income":
+            revenue += transaction.amount
+
+    return revenue
+
+
+def calc_expenses(transactions):
+
+    expenses = 0
+    for transaction in transactions:
+        if transaction.transaction_type == "expenses":
+
+            expenses += transaction.amount
+
+    return expenses
+
+
+def calc_cashflow(cash_inflow, cash_outflow):
+
+    return cash_inflow - cash_outflow
+
+
+
+def calc_profit_margin(revenue, expenses):
+    if revenue<expenses:
+        return 0
+    profit = revenue -expenses
+
+    return (profit/revenue) * 100
+
+
+def calc_revenue_by_category(transactions):
+
+    total = {}
+    for transaction in transactions:
+
+        if transaction.transaction_type == "revenue":
+
+            category = transaction.category
+
+            if category not in total:
+                total[category] = 0
+
+            total[category] += transaction.amount
+
+    return total
+
+def calc_expenses_by_category(transactions):
+
+    total = {} 
+    for transaction in transactions:
+
+        if transaction.transaction_type == "expenses":
+
+            category = transaction.category
+
+            if category not in total:
+                total[category] = 0
+
+            total[category] += transaction.amount
+
+    return total     
+    
+def calc_monthly_financials(data):
+
+    data["date"] = pd.to_datetime(data["date"])
+
+    data["month"] = data["date"].dt.to_period("M")
+
+    monthly_revenue = (
+        data[data["transaction_type"] == "income"]
+        .groupby("month")["amount"]
+        .sum()
+    )
+
+    monthly_expenses = (
+        data[data["transaction_type"] == "expense"]
+        .groupby("month")["amount"]
+        .sum()
+    )
+
+    result = pd.DataFrame({
+        "revenue": monthly_revenue,
+        "expenses": monthly_expenses
+    }).fillna(0)
+
+    return result
+
+monthly_fin = calc_monthly_financials(data)
+
+def monthly_profit(montly_fin):
+    monthly_fin["profit"] = (monthly_fin["revenue"] - monthly_fin["expenses"])
+    return monthly_fin["profit"]
+
+def calculate_revenue_change(current, previous):
+    return current - previous
+
+def calculate_expense_change(current, previous):
+    return current - previous
