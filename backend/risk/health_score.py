@@ -94,16 +94,8 @@ def receivables_score(receivables_ratio):
         return 10
 
 
-ind_scores = {
-    "profit_margin": profitability_score,
-    "expense_ratio": expense_score,
-    "revenue_growth": revenue_growth_score,
-    "expense_growth": expense_growth_score,
-    "current_ratio": liquidity_score,
-    "receivables_ratio": receivables_score
-}
 
-def calculate_health_score(ind_scores):
+def calc_health_score(ind_scores):
 
     weights = {
         "profit_margin": 0.20,

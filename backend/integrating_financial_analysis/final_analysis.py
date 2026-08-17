@@ -64,6 +64,37 @@ def analyze_business(data):
 
     warnings = evaluate_financial_risks(ratios)
 
+    ind_scores = {
+    "profit_margin": profitability_score(
+        ratios["profit_margin"]
+    ),
+
+    "expense_ratio": expense_score(
+        ratios["expense_ratio"]
+    ),
+
+    "revenue_growth": revenue_growth_score(
+        ratios["revenue_growth"]
+    ),
+
+    "expense_growth": expense_growth_score(
+        ratios["expense_growth"]
+    ),
+
+    "current_ratio": liquidity_score(
+        ratios["current_ratio"]
+    ),
+
+    "receivables_ratio": receivables_score(
+        ratios["receivables_ratio"]
+    )
+}
+
+    
+    health_score = calc_health_score(ind_scores)
+
+    status = health_status(health_score)
+
     return {
         "financial_data": {
             "revenue": revenue,
@@ -71,5 +102,10 @@ def analyze_business(data):
             "profit": profit
         },
         "ratios": ratios,
+        "ind_scores": ind_scores,
+        "health_score": health_score,
+        "health_status": status,
         "warnings": warnings
     }
+
+

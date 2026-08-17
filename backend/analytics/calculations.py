@@ -5,7 +5,7 @@ def calc_revenue(transactions):
     revenue = 0
     for transaction in transactions:
 
-        if transaction.transaction_type == "income":
+        if transaction.transaction_type == "revenue":
             revenue += transaction.amount
 
     return revenue
@@ -74,13 +74,13 @@ def calc_monthly_financials(data):
     data["month"] = data["date"].dt.to_period("M")
 
     monthly_revenue = (
-        data[data["transaction_type"] == "income"]
+        data[data["transaction_type"] == "revenue"]
         .groupby("month")["amount"]
         .sum()
     )
 
     monthly_expenses = (
-        data[data["transaction_type"] == "expense"]
+        data[data["transaction_type"] == "expenses"]
         .groupby("month")["amount"]
         .sum()
     )
@@ -94,7 +94,7 @@ def calc_monthly_financials(data):
 
 monthly_fin = calc_monthly_financials(data)
 
-def monthly_profit(montly_fin):
+def monthly_profit(monthly_fin):
     monthly_fin["profit"] = (monthly_fin["revenue"] - monthly_fin["expenses"])
     return monthly_fin["profit"]
 
