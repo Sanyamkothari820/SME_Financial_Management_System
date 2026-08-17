@@ -1,5 +1,5 @@
 import pandas as pd
-data = [1,2,3,4,5]
+# data = [1,2,3,4,5]
 def calc_revenue(transactions):
 
     revenue = 0
@@ -90,13 +90,9 @@ def calc_monthly_financials(data):
         "expenses": monthly_expenses
     }).fillna(0)
 
+    result["profit"] = result["revenue"]- result["expenses"]
+
     return result
-
-monthly_fin = calc_monthly_financials(data)
-
-def monthly_profit(monthly_fin):
-    monthly_fin["profit"] = (monthly_fin["revenue"] - monthly_fin["expenses"])
-    return monthly_fin["profit"]
 
 def calculate_revenue_change(current, previous):
     return current - previous
