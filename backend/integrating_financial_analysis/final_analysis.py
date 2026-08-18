@@ -2,26 +2,39 @@ from analytics.calculations import *
 from analytics.ratios import *
 from risk.health_score import *
 from risk.rules import *
+from transactions.models import Transaction, FinancialPosition
+
+def analyze_business(business):
 
 
-def analyze_business(data):
+    transactions = Transaction.objects.filter(business= business)
 
+    financial_position = FinancialPosition.objects.filter(business=business).latest("date")
 
-    revenue = calc_revenue(data)
-    expenses = calc_expenses(data)
+    revenue = calc_revenue(transactions)
+    expenses = calc_expenses(transactions)
 
     profit = calc_profit(revenue, expenses)
 
-    current_revenue = data["current_revenue"]
-    previous_revenue = data["previous_revenue"]
+    monthly_financials = calc_monthly_financials(transactions)
 
-    current_expenses = data["current_expenses"]
-    previous_expenses = data["previous_expenses"]
+    if len(monthly_financials) < 2:
 
-    current_assets = data["current_assets"]
-    current_liabilities = data["current_liabilities"]
+        revenue_growth = 0
+        expense_growth = 0
 
-    receivables = data["receivables"]
+    else:
+    
+        current_revenue = monthly_financials.iloc[-1]["revenue"]
+        previous_revenue = monthly_financials.iloc[-2]["revenue"]
+
+        current_expenses = monthly_financials.iloc[-1]["expenses"]
+        previous_expenses = monthly_financials.iloc[-2]["expenses"]
+
+    current_assets = calc_current_assets(financial_position)
+    current_liabilities = calc_current_liabilities(financial_position)
+
+    receivables = calc_receivables(financial_position)
 
     profit_margin = calculate_profit_margin(
         profit,

@@ -67,7 +67,19 @@ def calc_expenses_by_category(transactions):
 
     return total     
     
-def calc_monthly_financials(data):
+def calc_monthly_financials(transactions):
+
+    data = []
+
+    for transaction in transactions:
+
+        data.append({
+            "date": transaction.date,
+            "transaction_type": transaction.transaction_type,
+            "amount": float(transaction.amount)
+        })
+
+    data = pd.DataFrame(data)
 
     data["date"] = pd.to_datetime(data["date"])
 
@@ -94,20 +106,20 @@ def calc_monthly_financials(data):
 
     return result
 
-def calculate_revenue_change(current, previous):
+def calc_revenue_change(current, previous):
     return current - previous
 
-def calculate_expense_change(current, previous):
+def calc_expense_change(current, previous):
     return current - previous
 
-def calculate_current_assets(financial_position):
+def calc_current_assets(financial_position):
 
     return (financial_position.cash + financial_position.bank_balance + financial_position.receivables + financial_position.inventory + financial_position.other_current_assets)
 
-def calculate_current_liabilities(financial_position):
+def calc_current_liabilities(financial_position):
 
     return (financial_position.accounts_payable + financial_position.short_term_debt + financial_position.other_current_liabilities)
 
-def calculate_receivables(financial_position):
+def calc_receivables(financial_position):
 
     return financial_position.receivables
