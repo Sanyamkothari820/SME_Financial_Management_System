@@ -1,8 +1,9 @@
-from analytics.calculations import *
-from analytics.ratios import *
-from risk.health_score import *
-from risk.rules import *
-from transactions.models import Transaction, FinancialPosition
+from backend.analytics.calculations import *
+from backend.analytics.ratios import *
+from backend.risk.health_score import *
+from backend.risk.rules import *
+
+from businesses.models import Transaction, FinancialPosition,Business
 
 def analyze_business(business):
 
@@ -31,6 +32,10 @@ def analyze_business(business):
         current_expenses = monthly_financials.iloc[-1]["expenses"]
         previous_expenses = monthly_financials.iloc[-2]["expenses"]
 
+        revenue_growth = calculate_revenue_growth(current_revenue,previous_revenue)
+
+        expense_growth = calculate_expense_growth(current_expenses, previous_expenses)
+
     current_assets = calc_current_assets(financial_position)
     current_liabilities = calc_current_liabilities(financial_position)
 
@@ -46,15 +51,6 @@ def analyze_business(business):
         revenue
     )
 
-    revenue_growth = calculate_revenue_growth(
-        current_revenue,
-        previous_revenue
-    )
-
-    expense_growth = calculate_expense_growth(
-        current_expenses,
-        previous_expenses
-    )
 
     current_ratio = calculate_current_ratio(
         current_assets,
@@ -122,3 +118,7 @@ def analyze_business(business):
     }
 
 
+# result = analyze_business(
+#     Business.objects.get(name="ABC Traders")
+# )
+# print(result)
