@@ -1,0 +1,212 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Financial Dashboard</title>
+
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <h1>{{ business.name }} - Financial Dashboard</h1>
+
+
+    <!-- Financial Data -->
+
+    <h2>Financial Overview</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Revenue</h3>
+
+            <div class="value">
+                {{ revenue }}
+            </div>
+        </div>
+
+
+        <div class="card">
+            <h3>Expenses</h3>
+
+            <div class="value">
+                {{ expenses }}
+            </div>
+        </div>
+
+
+        <div class="card">
+            <h3>Profit</h3>
+
+            <div class="value">
+                {{ profit }}
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Ratios -->
+
+    <h2>Financial Ratios</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Profit Margin</h3>
+
+            <div class="ratio">
+                {{ profit_margin }}%
+            </div>
+        </div>
+
+
+        <div class="card">
+            <h3>Expense Ratio</h3>
+
+            <div class="ratio">
+                {{ expense_ratio }}%
+            </div>
+        </div>
+
+
+        <div class="card">
+            <h3>Revenue Growth</h3>
+
+            <div class="ratio">
+                {{ revenue_growth }}%
+            </div>
+        </div>
+
+
+        <div class="card">
+            <h3>Expense Growth</h3>
+
+            <div class="ratio">
+                {{ expense_growth }}%
+            </div>
+        </div>
+
+
+        <div class="card">
+            <h3>Current Ratio</h3>
+
+            <div class="ratio">
+                {{ current_ratio }}
+            </div>
+        </div>
+
+
+        <div class="card">
+            <h3>Receivables Ratio</h3>
+
+            <div class="ratio">
+                {{ receivables_ratio }}%
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Health Score -->
+
+   <h2>Financial Health</h2>
+
+<div class="health">
+
+    <div class="health-label">
+        FINANCIAL HEALTH SCORE
+    </div>
+
+    <div class="health-score">
+        {{ health_score|floatformat:1 }}
+        <span>/ 100</span>
+    </div>
+
+    <div class="status
+        {% if health_status == 'Healthy' %}
+            status-healthy
+        {% elif health_status == 'Moderate' %}
+            status-moderate
+        {% elif health_status == 'At Risk' %}
+            status-risk
+        {% elif health_status == 'Critical' %}
+            status-critical
+        {% endif %}
+    ">
+        {{ health_status }}
+    </div>
+
+    <div class="health-description">
+
+        {% if health_status == 'Healthy' %}
+            The business is showing strong overall financial health.
+        {% elif health_status == 'Moderate' %}
+            The business is financially stable, but some areas require monitoring.
+        {% elif health_status == 'At Risk' %}
+            The business has financial warning signs that require attention.
+        {% elif health_status == 'Critical' %}
+            The business is facing serious financial risks that require immediate attention.
+        {% endif %}
+
+    </div>
+
+</div>
+
+<h2>Early Warning System</h2>
+
+<div class="warnings">
+
+    {% if warnings %}
+
+        {% for warning in warnings %}
+
+            <div class="
+                warning
+                {% if 'CRITICAL' in warning %}
+                    warning-critical
+                {% elif 'WARNING' in warning %}
+                    warning-warning
+                {% elif 'WATCH' in warning %}
+                    warning-watch
+                {% endif %}
+            ">
+
+                <div class="warning-severity">
+
+                    {% if 'CRITICAL' in warning %}
+                        🔴 CRITICAL
+                    {% elif 'WARNING' in warning %}
+                        🟠 WARNING
+                    {% elif 'WATCH' in warning %}
+                        🟡 WATCH
+                    {% endif %}
+
+                </div>
+
+                <div class="warning-message">
+                    {{ warning }}
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="no-warnings">
+            ✅ No financial warnings detected.
+        </div>
+
+    {% endif %}
+
+</div>
+   

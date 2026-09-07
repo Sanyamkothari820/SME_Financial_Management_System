@@ -1,0 +1,160 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    padding: 30px;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+}
+
+h1 {
+    margin-bottom: 30px;
+}
+
+h2 {
+    margin-top: 35px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #555;
+}
+
+.value {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.ratio {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.health {
+    background: white;
+    padding: 35px;
+    margin-top: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.health-label {
+    font-size: 14px;
+    color: #777;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+}
+
+.health-score {
+    font-size: 55px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.health-score span {
+    font-size: 20px;
+    color: #777;
+    font-weight: normal;
+}
+
+.status {
+    display: inline-block;
+    padding: 10px 28px;
+    border-radius: 25px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.status-healthy {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-moderate {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status-risk {
+    background-color: #ffe0b2;
+    color: #8a4b00;
+}
+
+.status-critical {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.health-description {
+    margin-top: 18px;
+    color: #666;
+    font-size: 15px;
+}
+
+.warnings {
+    background: white;
+    padding: 25px;
+    margin-top: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.warning {
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border-left: 5px solid;
+}
+
+.warning-severity {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.warning-message {
+    font-size: 15px;
+}
+
+.warning-critical {
+    background-color: #f8d7da;
+    border-left-color: #dc3545;
+    color: #721c24;
+}
+
+.warning-warning {
+    background-color: #ffe0b2;
+    border-left-color: #fd7e14;
+    color: #8a4b00;
+}
+
+.warning-watch {
+    background-color: #fff3cd;
+    border-left-color: #ffc107;
+    color: #856404;
+}
+
+.no-warnings {
+    padding: 15px;
+    background-color: #d4edda;
+    border-radius: 8px;
+    color: #155724;
+    font-weight: bold;
+}
