@@ -1,15 +1,22 @@
 import pandas as pd
+
+
+
+# Calculating the revenue from the transactions 
 def calc_revenue(transactions):
 
     revenue = 0
     for transaction in transactions:
 
-        if transaction.transaction_type == "revenue":
+        if transaction.transaction_type == "revenue": #transaction_type is an attribute in the transactions
             revenue += transaction.amount
 
     return revenue
 
 
+
+
+#  Calculating the expenses from the transactions 
 def calc_expenses(transactions):
 
     expenses = 0
@@ -21,12 +28,16 @@ def calc_expenses(transactions):
     return expenses
 
 
+
+
+#  Calculating the cashflow of the business 
 def calc_cashflow(cash_inflow, cash_outflow):
 
     return cash_inflow - cash_outflow
 
 
 
+#  Calculating the profit from the transactions 
 def calc_profit(revenue, expenses):
     
     profit = revenue -expenses
@@ -34,6 +45,8 @@ def calc_profit(revenue, expenses):
     return profit
 
 
+
+#  Calculating the revenue through each category 
 def calc_revenue_by_category(transactions):
 
     total = {}
@@ -50,6 +63,9 @@ def calc_revenue_by_category(transactions):
 
     return total
 
+
+
+#  Calculating the expenses through each category
 def calc_expenses_by_category(transactions):
 
     total = {} 
@@ -65,7 +81,10 @@ def calc_expenses_by_category(transactions):
             total[category] += transaction.amount
 
     return total     
-    
+
+
+
+# Calculating the monthly financial for trends and charts
 def calc_monthly_financials(transactions):
 
     data = []
@@ -105,20 +124,30 @@ def calc_monthly_financials(transactions):
 
     return result
 
+
+# Calculating the change in revenue for analysis
 def calc_revenue_change(current, previous):
     return current - previous
 
+
+# Calculating the change in expenses for analysis
 def calc_expense_change(current, previous):
     return current - previous
 
+
+# Calculating the current assets available
 def calc_current_assets(financial_position):
 
     return (financial_position.cash + financial_position.bank_balance + financial_position.receivables + financial_position.inventory + financial_position.other_current_assets)
 
+
+# Calculating the current liabilities available
 def calc_current_liabilities(financial_position):
 
     return (financial_position.accounts_payable + financial_position.short_term_debt + financial_position.other_current_liabilities)
 
+
+# Calculating the receivables required to collect
 def calc_receivables(financial_position):
 
     return financial_position.receivables
