@@ -3,6 +3,10 @@ from django.db import models
 
 class Business(models.Model):
 
+    '''
+     Creating the Business class which should contain various info about the business including its name, industry and the date at which it is created
+    '''
+
     name = models.CharField(
         max_length=200
     )
@@ -20,6 +24,11 @@ class Business(models.Model):
 
 
 class Transaction(models.Model):
+
+    ''' 
+    Creating the Transaction class which should contain various info about the transaction records including the name of the business, the date at which it is created, the type of the transactions, its category, the amount which is associated with it along with the description of the transactions
+    '''
+
 
     business = models.ForeignKey(
         Business,
@@ -51,6 +60,9 @@ class Transaction(models.Model):
 
 
 class FinancialPosition(models.Model):
+
+    ''' Creating the FinancialPosition class which should contain various info about the financial status of the business including the name of the business, the date at which it is created, its financial attributes which includes cash, bank balance, receivables, inventory, other current assets, account payable, short-term debt and other current liabilities
+    '''
 
     business = models.ForeignKey(
         Business,
