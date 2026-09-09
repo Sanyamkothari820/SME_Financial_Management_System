@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+# It tells the django project about the businesses url, so that when someone visits the websites django looks for the urls of the businesses
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path( "",include("businesses.urls") ),
