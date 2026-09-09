@@ -9,6 +9,8 @@
 
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 
 
@@ -51,6 +53,14 @@
             </div>
         </div>
 
+    </div>
+
+
+
+    <h2>Monthly Financial Trend</h2>
+
+    <div class="chart-container">
+        <canvas id="financialChart"></canvas>
     </div>
 
 
@@ -209,4 +219,82 @@
     {% endif %}
 
 </div>
-   
+
+
+
+    <script>
+
+        const monthlyData = {{ monthly_data|safe }};
+
+        const months = monthlyData.map(
+            item => item.month
+        );
+
+        const revenue = monthlyData.map(
+            item => item.revenue
+        );
+
+        const expenses = monthlyData.map(
+            item => item.expenses
+        );
+
+        const ctx = document.getElementById(
+            "financialChart"
+        );
+
+        new Chart(ctx, {
+
+            type: "line",
+
+            data: {
+
+                labels: months,
+
+                datasets: [
+
+                    {
+                        label: "Revenue",
+                        data: revenue,
+                        borderWidth: 3,
+                        tension: 0.3
+                    },
+
+                    {
+                        label: "Expenses",
+                        data: expenses,
+                        borderWidth: 3,
+                        tension: 0.3
+                    }
+
+                ]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                plugins: {
+
+                    legend: {
+                        display: true
+                    }
+
+                },
+
+                scales: {
+
+                    y: {
+                        beginAtZero: true
+                    }
+
+                }
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
