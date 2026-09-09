@@ -26,7 +26,7 @@ class Business(models.Model):
 class Transaction(models.Model):
 
     ''' 
-    Creating the Transaction class which should contain various info about the transaction records including the name of the business, the date at which it is created, the type of the transactions, its category, the amount which is associated with it along with the description of the transactions
+    Creating the Transaction class which should contain various info about the transaction records including the name of the business, the date at which the transaction is entered, the type of the transactions, its category, the amount which is associated with it along with the description of the transactions
     '''
 
 
