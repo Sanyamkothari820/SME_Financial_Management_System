@@ -1,4 +1,5 @@
 {% load static %}
+{%load humanize %}
 
 <!DOCTYPE html>
 <html>
@@ -31,7 +32,7 @@
             <h3>Revenue</h3>
 
             <div class="value">
-                {{ revenue }}
+                Rs. {{ revenue|floatformat:2|intcomma }}
             </div>
         </div>
 
@@ -40,7 +41,7 @@
             <h3>Expenses</h3>
 
             <div class="value">
-                {{ expenses }}
+                Rs. {{ expenses|floatformat:2|intcomma }}
             </div>
         </div>
 
@@ -49,7 +50,7 @@
             <h3>Profit</h3>
 
             <div class="value">
-                {{ profit }}
+                Rs. {{ profit|floatformat:2|intcomma }}
             </div>
         </div>
 
@@ -66,64 +67,53 @@
 
 
 
-    <h2>Financial Ratios</h2>
+<h2>Financial Ratios</h2>
 
-    <div class="cards">
+<div class="ratio-grid">
 
-        <div class="card">
-            <h3>Profit Margin</h3>
-
-            <div class="ratio">
-                {{ profit_margin }}%
-            </div>
-        </div>
-
-
-        <div class="card">
-            <h3>Expense Ratio</h3>
-
-            <div class="ratio">
-                {{ expense_ratio }}%
-            </div>
-        </div>
-
-
-        <div class="card">
-            <h3>Revenue Growth</h3>
-
-            <div class="ratio">
-                {{ revenue_growth }}%
-            </div>
-        </div>
-
-
-        <div class="card">
-            <h3>Expense Growth</h3>
-
-            <div class="ratio">
-                {{ expense_growth }}%
-            </div>
-        </div>
-
-
-        <div class="card">
-            <h3>Current Ratio</h3>
-
-            <div class="ratio">
-                {{ current_ratio }}
-            </div>
-        </div>
-
-
-        <div class="card">
-            <h3>Receivables Ratio</h3>
-
-            <div class="ratio">
-                {{ receivables_ratio }}%
-            </div>
-        </div>
-
+    <div class="ratio-card">
+        <h3>Profit Margin</h3>
+        <div class= "ratio">
+        {{ profit_margin|floatformat:2 }}%
+        </div>   
     </div>
+
+    <div class="ratio-card">
+        <h3>Expense Ratio</h3>
+        <div class= "ratio">
+        {{ expense_ratio|floatformat:2 }}%
+        </div> 
+   </div>
+
+    <div class="ratio-card">
+        <h3>Revenue Growth</h3>
+        <div class= "ratio">
+        {{ revenue_growth|floatformat:2 }}%
+        </div>
+    </div>
+
+    <div class="ratio-card">
+        <h3>Expense Growth</h3>
+        <div class= "ratio">
+        {{ expense_growth|floatformat:2 }}%
+        </div>
+    </div>
+
+    <div class="ratio-card">
+        <h3>Current Ratio</h3>
+        <div class= "ratio">
+        {{ current_ratio|floatformat:2 }}
+        </div>   
+    </div>
+
+    <div class="ratio-card">
+        <h3>Receivables Ratio</h3>
+        <div class= "ratio">
+        {{ receivables_ratio|floatformat:2 }}%
+    </div>
+    </div>
+
+</div>
 
 
     <!-- Health Score -->
@@ -222,79 +212,89 @@
 
 
 
-    <script>
+  <script>
 
-        const monthlyData = {{ monthly_data|safe }};
+    const monthlyData = {{ monthly_data|safe }};
 
-        const months = monthlyData.map(
-            item => item.month
-        );
+    const months = monthlyData.map(
+        item => item.month
+    );
 
-        const revenue = monthlyData.map(
-            item => item.revenue
-        );
+    const revenue = monthlyData.map(
+        item => item.revenue
+    );
 
-        const expenses = monthlyData.map(
-            item => item.expenses
-        );
+    const expenses = monthlyData.map(
+        item => item.expenses
+    );
 
-        const ctx = document.getElementById(
-            "financialChart"
-        );
+    const profit = monthlyData.map(
+        item => item.profit
+    );
 
-        new Chart(ctx, {
+    const ctx = document.getElementById(
+        "financialChart"
+    );
 
-            type: "line",
+    new Chart(ctx, {
 
-            data: {
+        type: "line",
 
-                labels: months,
+        data: {
 
-                datasets: [
+            labels: months,
 
-                    {
-                        label: "Revenue",
-                        data: revenue,
-                        borderWidth: 3,
-                        tension: 0.3
-                    },
+            datasets: [
 
-                    {
-                        label: "Expenses",
-                        data: expenses,
-                        borderWidth: 3,
-                        tension: 0.3
-                    }
+                {
+                    label: "Revenue",
+                    data: revenue,
+                    borderWidth: 3,
+                    tension: 0.3
+                },
 
-                ]
+                {
+                    label: "Expenses",
+                    data: expenses,
+                    borderWidth: 3,
+                    tension: 0.3
+                },
+
+                {
+                    label: "Profit",
+                    data: profit,
+                    borderWidth: 3,
+                    tension: 0.3
+                }
+
+            ]
+
+        },
+
+        options: {
+
+            responsive: true,
+
+            plugins: {
+
+                legend: {
+                    display: true
+                }
 
             },
 
-            options: {
+            scales: {
 
-                responsive: true,
-
-                plugins: {
-
-                    legend: {
-                        display: true
-                    }
-
-                },
-
-                scales: {
-
-                    y: {
-                        beginAtZero: true
-                    }
-
+                y: {
+                    beginAtZero: true
                 }
 
             }
 
-        });
+        }
 
-    </script>
+    });
 
+</script>
 </body>
-
+</html>
