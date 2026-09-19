@@ -33,6 +33,7 @@ def dashboard(request, business_id):
             "month": str(month),
             "revenue": float(row["revenue"]),
             "expenses": float(row["expenses"]),
+            "profit": float(row["profit"]),
         })
 
     context = {
