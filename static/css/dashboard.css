@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+   font-family: Cambria, Georgia, serif;
     background-color: #f4f6f8;
     margin: 0;
     padding: 30px;
@@ -18,10 +18,14 @@ h2 {
     margin-top: 35px;
 }
 
+
+
+
 .cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+    margin-top: 20px
 }
 
 .card {
@@ -41,10 +45,34 @@ h2 {
     font-weight: bold;
 }
 
+
+
 .ratio {
     font-size: 20px;
     font-weight: bold;
 }
+
+.ratio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.ratio-card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.ratio-card h3 {
+    color: #555;
+    margin-top: 0;
+}
+
+
 
 .health {
     background: white;
@@ -108,6 +136,7 @@ h2 {
     font-size: 15px;
 }
 
+
 .warnings {
     background: white;
     padding: 25px;
@@ -159,6 +188,11 @@ h2 {
     font-weight: bold;
 }
 
+
+/* =========================
+   FINANCIAL TREND CHART
+   ========================= */
+
 .chart-container {
     background: white;
     padding: 25px;
@@ -166,4 +200,126 @@ h2 {
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     height: 350px;
+}
+
+
+
+@media (max-width: 900px) {
+
+    body {
+        padding: 20px;
+    }
+
+    .container {
+        width: 90%;
+    }
+
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .ratio-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .chart-container {
+        height: 320px;
+    }
+}
+
+
+
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 15px;
+        font-size: 14px;
+    }
+
+    .container {
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 26px;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        font-size: 21px;
+        margin-top: 28px;
+    }
+
+
+
+    .cards {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .value {
+        font-size: 24px;
+    }
+
+
+
+
+    .ratio-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .ratio-card {
+        padding: 20px;
+    }
+
+    .ratio-card p {
+        font-size: 24px;
+    }
+
+
+
+    .health {
+        padding: 25px 15px;
+    }
+
+    .health-score {
+        font-size: 42px;
+    }
+
+    .health-score span {
+        font-size: 16px;
+    }
+
+    .status {
+        font-size: 17px;
+        padding: 8px 20px;
+    }
+
+
+  
+    .warnings {
+        padding: 15px;
+    }
+
+    .warning {
+        padding: 12px;
+    }
+
+    .warning-message {
+        font-size: 14px;
+    }
+
+
+
+
+    .chart-container {
+        height: 280px;
+        padding: 15px;
+    }
 }
