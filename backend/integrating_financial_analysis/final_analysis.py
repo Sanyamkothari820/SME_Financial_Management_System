@@ -39,9 +39,14 @@ def analyze_business(business):
 
 
     revenue = calc_revenue(transactions)
-    expenses = calc_expenses(transactions)
-    profit = calc_profit(revenue, expenses)
+    operating_expenses = calc_operating_expenses(transactions)
+    cost_of_goods_sold = calc_cost_of_goods_sold(transactions)
+    gross_profit = calc_gross_profit( revenue, cost_of_goods_sold)
+    profit = calc_profit(gross_profit, operating_expenses)
     monthly_financials = calc_monthly_financials(transactions)
+    
+
+   
 
 
 
@@ -60,8 +65,8 @@ def analyze_business(business):
         previous_revenue = monthly_financials.iloc[-2]["revenue"]
 
 
-        current_expenses = monthly_financials.iloc[-1]["expenses"]
-        previous_expenses = monthly_financials.iloc[-2]["expenses"]
+        current_expenses = monthly_financials.iloc[-1]["operating_expenses"]
+        previous_expenses = monthly_financials.iloc[-2]["operating_expenses"]
 
 
         revenue_growth = calculate_revenue_growth(current_revenue,previous_revenue)
@@ -77,17 +82,42 @@ def analyze_business(business):
 
     profit_margin = calculate_profit_margin(profit, revenue)
 
-    expense_ratio = calculate_expense_ratio(expenses, revenue)
+    gross_profit_margin = calculate_gross_profit_margin(
+    gross_profit,
+    revenue
+)
+
+    operating_expense_ratio = calculate_operating_expense_ratio(operating_expenses, revenue)
 
     current_ratio = calculate_current_ratio(current_assets,  current_liabilities)
 
     receivables_ratio = calculate_receivables_ratio(receivables, revenue)
 
+    dso = calculate_dso(
+    receivables,
+    revenue
+)
+
+    inventory_conversion_period = calculate_inventory_conversion_period(
+        financial_position.inventory,
+        cost_of_goods_sold
+    )
+
+    accounts_payable_period = calculate_accounts_payable_period(
+        financial_position.accounts_payable,
+        cost_of_goods_sold
+    )
+
+    cash_conversion_cycle = calculate_cash_conversion_cycle(
+        dso,
+        inventory_conversion_period,
+        accounts_payable_period
+    )
 
 
     ratios = {
         "profit_margin": profit_margin,
-        "expense_ratio": expense_ratio,
+        "operating_expense_ratio": operating_expense_ratio,
         "revenue_growth": revenue_growth,
         "expense_growth": expense_growth,
         "current_ratio": current_ratio,
@@ -104,7 +134,9 @@ def analyze_business(business):
 
     "profit_margin": profitability_score(ratios["profit_margin"]),
 
-    "expense_ratio": expense_score(ratios["expense_ratio"] ),
+    "gross_profit_margin": gross_profit_margin,
+
+    "operating_expense_ratio": operating_expense_score(ratios["operating_expense_ratio"] ),
 
     "revenue_growth": revenue_growth_score(ratios["revenue_growth"]),
 
@@ -130,8 +162,16 @@ def analyze_business(business):
     return {
          "financial_data": {
             "revenue": revenue,
-            "expenses": expenses,
+            "cost_of_goods_sold": cost_of_goods_sold,
+            "gross_profit": gross_profit,
+            "operating_expenses": operating_expenses,
             "profit": profit
+        },
+        "working_capital": {
+            "dso": dso,
+            "inventory_conversion_period": inventory_conversion_period,
+            "accounts_payable_period": accounts_payable_period,
+            "cash_conversion_cycle": cash_conversion_cycle
         },
         "ratios": ratios,
         "ind_scores": ind_scores,
