@@ -17,15 +17,15 @@ def calc_revenue(transactions):
 
 
 #  Calculating the expenses from the transactions 
-def calc_expenses(transactions):
+def calc_operating_expenses(transactions):
 
-    expenses = 0
+    operating_expenses = 0
     for transaction in transactions:
-        if transaction.transaction_type == "expenses":
+        if ( transaction.transaction_type == "expenses" and transaction.category.lower() != "cogs" ):
 
-            expenses += transaction.amount
+            operating_expenses += transaction.amount
 
-    return expenses
+    return operating_expenses
 
 
 
@@ -38,9 +38,9 @@ def calc_cashflow(cash_inflow, cash_outflow):
 
 
 #  Calculating the profit from the transactions 
-def calc_profit(revenue, expenses):
+def calc_profit(gross_profit, operating_expenses):
     
-    profit = revenue -expenses
+    profit = gross_profit - operating_expenses
 
     return profit
 
@@ -94,8 +94,18 @@ def calc_monthly_financials(transactions):
         data.append({
             "date": transaction.date,
             "transaction_type": transaction.transaction_type,
+            "category": transaction.category,
             "amount": float(transaction.amount)
         })
+        if not data:
+         return pd.DataFrame(
+            columns=[
+                "revenue",
+                "cost_of_sales",
+                "operating_expenses",
+                "profit"
+            ]
+        )
 
     data = pd.DataFrame(data)
 
@@ -109,18 +119,32 @@ def calc_monthly_financials(transactions):
         .sum()
     )
 
-    monthly_expenses = (
-        data[data["transaction_type"] == "expenses"]
+    monthly_cogs = (
+        data[
+            (data["transaction_type"] == "expenses") &
+            (data["category"].str.lower() == "cogs")
+        ]
+        .groupby("month")["amount"]
+        .sum()
+    )
+
+    
+    monthly_operating_expenses = (
+        data[
+            (data["transaction_type"] == "expenses") &
+            (data["category"].str.lower() != "cogs")
+        ]
         .groupby("month")["amount"]
         .sum()
     )
 
     result = pd.DataFrame({
         "revenue": monthly_revenue,
-        "expenses": monthly_expenses
+        "cost_of_goods_sold": monthly_cogs,
+        "operating_expenses": monthly_operating_expenses
     }).fillna(0)
 
-    result["profit"] = result["revenue"]- result["expenses"]
+    result["profit"] = result["revenue"]- result["operating_expenses"]- result["cost_of_goods_sold"]
 
     return result
 
@@ -151,3 +175,20 @@ def calc_current_liabilities(financial_position):
 def calc_receivables(financial_position):
 
     return financial_position.receivables
+
+def calc_cost_of_goods_sold(transactions):
+    cost_of_goods_sold = 0
+
+    for transaction in transactions:
+        if (
+            transaction.transaction_type == "expenses"
+            and transaction.category.lower() == "cogs"
+        ):
+            cost_of_goods_sold += transaction.amount
+
+    return cost_of_goods_sold
+
+
+
+def calc_gross_profit(revenue, cost_of_goods_sold):
+    return revenue - cost_of_goods_sold
