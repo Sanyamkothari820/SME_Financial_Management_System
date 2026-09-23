@@ -120,5 +120,36 @@ class FinancialPosition(models.Model):
         default=0
     )
 
+
+    total_assets = models.DecimalField(
+        max_digits=12,
+        decimal_places=2,
+        default=0
+    )
+
+    retained_earnings = models.DecimalField(
+        max_digits=12,
+        decimal_places=2,
+        default=0
+    )
+
+    ebit = models.DecimalField(
+        max_digits=12,
+        decimal_places=2,
+        default=0
+    )
+
+    total_liabilities = models.DecimalField(
+        max_digits=12,
+        decimal_places=2,
+        default=0
+    )
+
+    book_value_equity = models.DecimalField(
+        max_digits=12,
+        decimal_places=2,
+        default=0
+    )
+
     def __str__(self):
         return f"{self.business.name} - {self.date}"
