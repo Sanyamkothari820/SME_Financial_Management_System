@@ -38,10 +38,10 @@
 
 
         <div class="card">
-            <h3>Expenses</h3>
+            <h3>Operating Expenses</h3>
 
             <div class="value">
-                Rs. {{ expenses|floatformat:2|intcomma }}
+                Rs. {{ operating_expenses|floatformat:2|intcomma }}
             </div>
         </div>
 
@@ -79,9 +79,9 @@
     </div>
 
     <div class="ratio-card">
-        <h3>Expense Ratio</h3>
+        <h3>Operating Expense Ratio</h3>
         <div class= "ratio">
-        {{ expense_ratio|floatformat:2 }}%
+        {{ operating_expense_ratio|floatformat:2 }}%
         </div> 
    </div>
 
@@ -224,10 +224,13 @@
         item => item.revenue
     );
 
-    const expenses = monthlyData.map(
-        item => item.expenses
-    );
+    const costOfgoodssold = monthlyData.map(
+    item => item.cost_of_goods_sold
+);
 
+    const operating_expenses = monthlyData.map(
+        item => item.operating_expenses
+    );
     const profit = monthlyData.map(
         item => item.profit
     );
@@ -254,10 +257,16 @@
                 },
 
                 {
-                    label: "Expenses",
-                    data: expenses,
+                    label: "Operating_Expenses",
+                    data: operating_expenses,
                     borderWidth: 3,
                     tension: 0.3
+                },
+                {
+                     label: "COGS",
+                     data: costOfgoodssold,
+                     borderWidth: 3,
+                     tension: 0.3
                 },
 
                 {
