@@ -15,18 +15,18 @@ def profitability_score(profit_margin):
         return 0
 
 
-#Scoring the expense management of the business
-def expense_score(expense_ratio):
+#Scoring the operating expense management of the business
+def operating_expense_score(operating_expense_ratio):
 
-    if expense_ratio <= 50:
+    if operating_expense_ratio <= 50:
         return 100
-    elif expense_ratio <= 60:
+    elif operating_expense_ratio <= 60:
         return 85
-    elif expense_ratio <= 70:
+    elif operating_expense_ratio <= 70:
         return 70
-    elif expense_ratio <= 80:
+    elif operating_expense_ratio <= 80:
         return 50
-    elif expense_ratio <= 90:
+    elif operating_expense_ratio <= 90:
         return 30
     else:
         return 10
@@ -112,7 +112,7 @@ def calc_health_score(ind_scores):
 
     weights = {
         "profit_margin": 0.20,
-        "expense_ratio": 0.15,
+        "operating_expense_ratio": 0.15,
         "revenue_growth": 0.20,
         "expense_growth": 0.15,
         "current_ratio": 0.20,
@@ -121,7 +121,7 @@ def calc_health_score(ind_scores):
 
     score = (
         ind_scores["profit_margin"] * weights["profit_margin"]
-        + ind_scores["expense_ratio"] * weights["expense_ratio"]
+        + ind_scores["operating_expense_ratio"] * weights["operating_expense_ratio"]
         + ind_scores["revenue_growth"] * weights["revenue_growth"]
         + ind_scores["expense_growth"] * weights["expense_growth"]
         + ind_scores["current_ratio"] * weights["current_ratio"]
