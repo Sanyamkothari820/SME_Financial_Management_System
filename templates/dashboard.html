@@ -116,6 +116,73 @@
 </div>
 
 
+
+<!-- NRB Financial Analysis -->
+<h2>NRB Financial Analysis</h2>
+
+<div class="nrb-grid">
+
+    <div class="nrb-card">
+        <h3>Days Sales Outstanding</h3>
+
+        <div class="nrb-value">
+            {{ dso|floatformat:2 }}
+        </div>
+
+        <div class="nrb-unit">
+            Days
+        </div>
+
+       
+    </div>
+
+
+    <div class="nrb-card">
+        <h3>Inventory Conversion Period</h3>
+
+        <div class="nrb-value">
+            {{ inventory_conversion_period|floatformat:2 }}
+        </div>
+
+        <div class="nrb-unit">
+            Days
+        </div>
+
+        
+    </div>
+
+
+    <div class="nrb-card">
+        <h3>Accounts Payable Period</h3>
+
+        <div class="nrb-value">
+            {{ accounts_payable_period|floatformat:2 }}
+        </div>
+
+        <div class="nrb-unit">
+            Days
+        </div>
+
+       
+    </div>
+
+
+    <div class="nrb-card">
+        <h3>Cash Conversion Cycle</h3>
+
+        <div class="nrb-value">
+            {{ cash_conversion_cycle|floatformat:2 }}
+        </div>
+
+        <div class="nrb-unit">
+            Days
+        </div>
+
+        
+    </div>
+
+</div>
+
     <!-- Health Score -->
 
    <h2>Financial Health</h2>
