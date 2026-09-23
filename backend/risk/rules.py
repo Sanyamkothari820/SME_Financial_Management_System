@@ -15,15 +15,15 @@ def check_profit_margin(profit_margin):
 
 
 # Checking the expense ratio value with the standard value for generating warning or not
-def check_expense_ratio(expense_ratio):
+def check_operating_expense_ratio(operating_expense_ratio):
 
-    if expense_ratio > 90:
-        return "CRITICAL: Expenses are consuming most of the revenue."
+    if operating_expense_ratio > 90:
+        return "CRITICAL: Operating expenses are consuming most of the revenue."
 
-    elif expense_ratio > 80:
-        return "WARNING: Expense ratio is very high."
+    elif operating_expense_ratio > 80:
+        return "WARNING: Operating expense ratio is very high."
 
-    elif expense_ratio > 70:
+    elif operating_expense_ratio > 70:
         return "WATCH: Operating expenses are relatively high."
 
     return None
@@ -125,7 +125,7 @@ def evaluate_financial_risks(ratios):
 
 
 
-    warning = check_expense_ratio(ratios["expense_ratio"])
+    warning = check_operating_expense_ratio(ratios["operating_expense_ratio"])
     if warning:
         warnings.append(warning)
 
