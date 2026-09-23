@@ -74,6 +74,44 @@ h2 {
 
 
 
+.nrb-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.nrb-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.nrb-card h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.nrb-value {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.nrb-unit {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+
+
+
+
 .health {
     background: white;
     padding: 35px;
@@ -222,6 +260,11 @@ h2 {
         grid-template-columns: repeat(2, 1fr);
     }
 
+      .nrb-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
     .chart-container {
         height: 320px;
     }
@@ -282,6 +325,10 @@ h2 {
         font-size: 24px;
     }
 
+
+     .nrb-grid {
+        grid-template-columns: 1fr;
+    }
 
 
     .health {
