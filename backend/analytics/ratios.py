@@ -8,13 +8,13 @@ def calculate_profit_margin(profit, revenue):
 
 
 
-# Calculating the expense ratio 
-def calculate_expense_ratio(expenses, revenue):
+# Calculating the operating expense ratio 
+def calculate_operating_expense_ratio(operating_expenses, revenue):
 
     if revenue == 0:
         return 0
 
-    return (expenses / revenue) * 100
+    return (operating_expenses / revenue) * 100
 
 
 
@@ -55,3 +55,47 @@ def calculate_receivables_ratio(receivables, revenue):
         return 0
 
     return (receivables / revenue) * 100
+
+
+def calculate_gross_profit_margin(gross_profit, revenue):
+    if revenue == 0:
+        return 0
+
+    return (gross_profit / revenue) * 100
+
+
+
+def calculate_dso(receivables, revenue):
+    if revenue == 0:
+        return 0
+
+    return (receivables / revenue) * 365
+
+
+def calculate_inventory_conversion_period(inventory, cost_of_goods_sold):
+    if cost_of_goods_sold == 0:
+        return 0
+
+    return (inventory / cost_of_goods_sold) * 365
+
+
+def calculate_accounts_payable_period(
+    accounts_payable,
+    cost_of_goods_sold
+):
+    if cost_of_goods_sold == 0:
+        return 0
+
+    return (accounts_payable / cost_of_goods_sold) * 365
+
+
+def calculate_cash_conversion_cycle(
+    dso,
+    inventory_conversion_period,
+    accounts_payable_period
+):
+    return (
+        dso
+        + inventory_conversion_period
+        - accounts_payable_period
+    )
