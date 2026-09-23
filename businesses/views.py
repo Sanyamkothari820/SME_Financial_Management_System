@@ -32,31 +32,47 @@ def dashboard(request, business_id):
         monthly_data.append({
             "month": str(month),
             "revenue": float(row["revenue"]),
-            "expenses": float(row["expenses"]),
+            "cost_of_goods_sold": float(row["cost_of_goods_sold"]),
+            "operating_expenses": float(row["operating_expenses"]),
             "profit": float(row["profit"]),
         })
 
     context = {
         "business": business,
 
+
         "revenue": analysis["financial_data"]["revenue"],
-        "expenses": analysis["financial_data"]["expenses"],
+        "operating_expenses": analysis["financial_data"]["operating_expenses"],
         "profit": analysis["financial_data"]["profit"],
 
+
+
+
         "profit_margin": analysis["ratios"]["profit_margin"],
-        "expense_ratio": analysis["ratios"]["expense_ratio"],
+        "operating_expense_ratio": analysis["ratios"]["operating_expense_ratio"],
         "revenue_growth": analysis["ratios"]["revenue_growth"],
         "expense_growth": analysis["ratios"]["expense_growth"],
         "current_ratio": analysis["ratios"]["current_ratio"],
         "receivables_ratio": analysis["ratios"]["receivables_ratio"],
 
+
+
         "health_score": analysis["health_score"],
         "health_status": analysis["health_status"],
-
         "warnings": analysis["warnings"],
 
+        
+
+        "dso": analysis["working_capital"]["dso"],
+        "inventory_conversion_period": analysis["working_capital"]["inventory_conversion_period"],
+        "accounts_payable_period": analysis["working_capital"]["accounts_payable_period"],
+        "cash_conversion_cycle": analysis["working_capital"]["cash_conversion_cycle"],
+
+
+
         "monthly_data": monthly_data,
-    }
+
+        }
 
     return render(
         request,
