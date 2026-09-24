@@ -32,9 +32,16 @@ def calculate_revenue_growth(current_revenue, previous_revenue):
 def calculate_expense_growth(current_expenses, previous_expenses):
 
     if previous_expenses == 0:
-        return 0
 
-    return ( (current_expenses - previous_expenses)/ previous_expenses ) * 100
+        if current_expenses == 0:
+            return 0
+
+        return 100
+
+    return (
+        (current_expenses - previous_expenses)
+        / previous_expenses
+    ) * 100
 
 
 
